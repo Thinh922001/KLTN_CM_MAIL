@@ -1,11 +1,21 @@
 import express, { Request, Response, NextFunction } from "express";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import cors from "cors"; // Thêm import cors
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(
+    cors({
+        origin: "https://kltn-huit-production.up.railway.app",
+        methods: ["POST"],
+        allowedHeaders: ["Content-Type", "Authorization", "x-api-key"],
+        credentials: true,
+    })
+);
 
 // Middleware để parse JSON request
 app.use(express.json());
